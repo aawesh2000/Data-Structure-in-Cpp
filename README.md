@@ -3,12 +3,14 @@ NOTE : Uncomment the code which you want to run!
 
 
 RUNNING:-
+
        => g++ stack.cpp/g++ queue.cpp
        =>./a.out
 
 2) Binary Tree => Traversals, height, kth level, printing all levels level-wise, Count of nodes, sum of all nodes, replacing sum, Diameter of tree etc etc are implemented
 
 RUNNING:-
+
         => g++ tree.cpp
         => ./a.out
         
