@@ -7,4 +7,4 @@ RUNNING:-
 RUNNING:-
         => g++ tree.cpp
         => ./a.out
-
+3)Binary Search Tree, running similarly as above
