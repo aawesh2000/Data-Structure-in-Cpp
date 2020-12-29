@@ -1,21 +1,19 @@
-
+//BST IN CPP
 #include<iostream>
 using namespace std;
 #include<bits/stdc++.h>
 #include<math.h>           
 #include<cstdio>
 #include<stdio.h>
-#include<algorithm>       
-#include<cmath>           
-#include<climits>       
-#include<cstring>       
-#include<string>        
+#include<algorithm>    
+#include<cmath>          
+#include<climits>        
+#include<cstring>        
+#include<string>         
 #include<stdlib.h>
-#include<queue>         
-#include<stack>         
-#include<deque>     
-
-//BST-binary search tree
+#include<queue>          
+#include<stack>          
+#include<deque>          
 
 class node{
 public:
@@ -43,6 +41,18 @@ node* insertInBST(node*root, int data){
     return root;
 }
 
+node* build_or_insert(){                     
+    int d;
+    cin>>d;
+    node *root = NULL;
+    while(d != -1){
+        root = insertInBST(root, d);
+        cin>>d;
+    }
+    return root;
+}
+
+
 //searching in BST
 bool searchInBST(node*root, int data){
     if(root==NULL){
@@ -59,28 +69,9 @@ bool searchInBST(node*root, int data){
     }
 }
 
-node* build_or_insert(){                       //return tree
-    int d;
-    cin>>d;
-    node *root = NULL;
-    while(d != -1){
-        root = insertInBST(root, d);
-        cin>>d;
-    }
-    return root;
-}
-
-
-// algo for BFS=>
-// take a queue , push, root in it, 
-// while loop jabtak tabtak ki queue NOT EMPTY
-// pop root, print the element which is popped
-// root ke dono neighbours push it then 
-// pop once of these and push uske elements in to queue
-// and go on like this
 
 void BFS_TRAVERSAL(node*root){
-    queue<node*> q;                         
+    queue<node*> q;                   
     q.push(root);
     while(!q.empty()){
         node *f = q.front();
@@ -157,6 +148,47 @@ bool isBST(node*root, int min=INT_MIN, int max=INT_MAX){
     return false;
 }
 
+//BST to linkedlist
+class linkedlist{
+public:
+    node*head;
+    node*tail;
+};
+linkedlist flatten(node*root){
+    linkedlist l;
+    if(root==NULL){
+        l.head=l.tail=NULL;
+        return l;
+    }
+    if(root->left==NULL && root->right==NULL){
+        l.head=l.tail=root;
+        return l; 
+    }
+    if(root->left!=NULL && root->right==NULL){
+        linkedlist leftLL = flatten(root->left);
+        leftLL.tail->right = root;
+        l.head = leftLL.head;
+        l.tail = root;
+        return l;
+    }
+    if(root->left==NULL && root->right!=NULL){
+        linkedlist rightLL = flatten(root->right);
+        root->right = rightLL.head;
+        l.head = root;
+        l.tail = rightLL.tail;
+        return l;
+    }
+    if(root->left!=NULL && root->right!=NULL){
+        linkedlist leftLL = flatten(root->left);
+        linkedlist rightLL = flatten(root->right);
+        leftLL.tail->right = root;
+        root->right = rightLL.head;
+        l.head = leftLL.head;
+        l.tail = rightLL.tail;
+        return l;
+    }
+}
+
 int main(){
     int s;
     cout<<"ENTER VALUES : ";
@@ -188,12 +220,20 @@ int main(){
     // cout<<endl;
 
     //to check if tree is BST or NOT
-    if(isBST(root,INT_MIN, INT_MAX)){
-        cout<<"BST"<<endl;
+    // if(isBST(root,INT_MIN, INT_MAX)){
+    //     cout<<"BST"<<endl;
+    // }
+    // else{
+    //     cout<<"NOT BST"<<endl;
+    // }
+
+    //bst to LL
+    linkedlist l = flatten(root);
+    node *temp = l.head;
+    while(temp!=NULL){
+        cout<<temp->data<<"->";
+        temp = temp -> right;
     }
-    else{
-        cout<<"NOT BST"<<endl;
-    }
-    
+    cout<<endl;
 return 0;
 }
