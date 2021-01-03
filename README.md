@@ -1,4 +1,5 @@
 NOTE : Uncomment the code which you want to run! 
+
 1) I have implemented stack & queue using Linkedlist, vector, vector+template(Generalized) in CPP 
 
 
@@ -15,3 +16,5 @@ RUNNING:-
         => ./a.out
         
 3) Binary Search Tree, running similarly as above
+
+4) practice.cpp contains questions from GFG, CodingBlocks, CodingNinjas etc etc websites.
